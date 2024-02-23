@@ -112,9 +112,20 @@ class adminC extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user, $iduser)
     {
-        //
+    
+
+        try{
+            $data = $request->all();
+            $data['gambar'] = 'user.png';
+            // $data['password'] = Hash::make('admin'.date('Y'));
+            User::where("iduser", $iduser)->first()->update($data);
+
+            return redirect()->back()->with('success', 'Success');
+        }catch(\Throwable $th){
+            return redirect()->back()->with('toast_error', 'Terjadi kesalahan');
+        }
     }
 
     /**
@@ -123,8 +134,9 @@ class adminC extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user, $iduser)
     {
-        //
+        User::destroy($iduser);
+        return redirect()->back()->with('success', 'Success');
     }
 }
