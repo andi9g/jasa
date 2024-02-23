@@ -22,7 +22,7 @@ Route::get('product/detail/{idproduk}', 'productC@detail')->name('detail');
 Route::get('product/package/{iddetailproduk}/{namadetailproduk}', 'productC@package')->name('package');
 
 Route::get('/', function () {
-    return redirect('login');
+    return redirect('product');
 });
 
 
